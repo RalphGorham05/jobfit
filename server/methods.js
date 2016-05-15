@@ -429,7 +429,7 @@ Meteor.methods(
             var ct = emps[i].count;
             var oct = emps[i].count - 1;
             emps[i].jobsec = ((oct * emps[i].jobsec) + as[key].job_security)/ct;
-            emps[i].worklife = ((oct * emps[i].worklife) + as[key].worklife_life_balance)/ct;
+            emps[i].worklife = ((oct * emps[i].worklife) + as[key].work_life_balance)/ct;
             emps[i].workload = ((oct * emps[i].workload) + as[key].workload)/ct;
             emps[i].careerpath = ((oct * emps[i].careerpath) + as[key].career_path)/ct;
             emps[i].td = (oct * emps[i].td) + as[key].development_opportunities;
