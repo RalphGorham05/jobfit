@@ -205,8 +205,6 @@ Template.creds.events({
       var cred1 = AutoForm.getFieldValue('creds.0','credsForm');
       var cred2 = AutoForm.getFieldValue('creds.1','credsForm');
       var cred3 = AutoForm.getFieldValue('creds.2','credsForm');
-      var cred4 = AutoForm.getFieldValue('creds.3','credsForm');
-      var cred5 = AutoForm.getFieldValue('creds.4','credsForm');
 
 
       var user = Meteor.userId;
@@ -215,10 +213,9 @@ Template.creds.events({
       // Add skill info to profile
       Meteor.users.update(
         {_id: Meteor.userId()}, {$set:
-          {"profile.credentials.creds": [ cred1, cred2, cred3, cred4, cred5] }
+          {"profile.credentials.creds": [ cred1, cred2, cred3] }
       });
 
-      Router.go('tSurvey');
 
 
     }
@@ -249,6 +246,7 @@ Template.occupationInfo.events({
       event.target.industry.value = "";
       event.target.occupation.value = '';
       event.target.jobLevel.value = '';
+      Router.go("jobInfoView");
 
     }
 
