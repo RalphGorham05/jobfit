@@ -1,6 +1,7 @@
 <template name = 'tSurvey'>
 {{#if currentUser}}
   {{> tSurveyNav}}
+  {{> surveyInnerNav}}
 
   {{> tSurveyMain}}
 
@@ -33,7 +34,7 @@
             <li><a href="{{pathFor route='profile'}}">Profile</a></li>
             <li class="active"><a href="{{pathFor route='information'}}">About You</a></li>
             <li><a href="{{pathFor route='Emp'}}">About Your Employer</a></li>
-          
+
             <li><a href="{{pathFor route='match'}}">Matches</a></li>
           {{/if}}
         </ul>
@@ -46,6 +47,20 @@
 
 </template>
 
+<template name = 'surveyInnerNav'>
+    <div class="navbar-right">
+    <div class="navbar-inner">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="{{pathFor route='information'}}" class = 'fa fa-angle-double-right btn btn-primary btn-lg info'>Basic Information</a></li>
+      <li><a href="{{pathFor route='educationView'}}" class = 'fa fa-angle-double-right btn btn-primary btn-lg info'>Education</a></li>
+      <li><a href="{{pathFor route='skillsView'}}" class = 'fa fa-angle-double-right btn btn-primary btn-lg info'>Skills</a></li>
+      <li><a href="{{pathFor route='credsView'}}" class = 'fa fa-angle-double-right btn btn-primary btn-lg info'>Credentials/Certificates</a></li>
+      <li><a href="{{pathFor route='tSurvey'}}" class = 'fa fa-angle-double-right btn btn-primary btn-lg info'>Your Work Values</a></li>
+    </ul>
+  </div>
+</div>
+</template>
+
 
 <template name = 'tSurveyMain'>
   <div id = 'gray-container'>
@@ -53,7 +68,7 @@
 
           <div class="cover-container">
 
-              <h1>Employer Work Values      (5/5)</h1>
+              <h1>Your Work Values      (5/5)</h1>
 
               <p class = 'lead'>
                 Think about the things that you are looking for in an employer and rate how important each of those things is to you.
@@ -97,8 +112,7 @@
 
 
 
-
-  <input type = "submit" class = 'btn btn-primary btn-lg' value = "Employer Info&raquo;">
+  <input type = "submit" class = 'btn btn-primary btn-lg' value = "Next&raquo;">
 </fieldset>
 {{/autoForm}}
 </div>
@@ -109,6 +123,7 @@
 <template name = 'tSurvey2View'>
 {{#if currentUser}}
   {{> tSurveyNav}}
+  {{> surveyInnerNav}}
 
   {{> tSurveyMain2}}
 
@@ -125,7 +140,7 @@
 
           <div class="cover-container">
 
-              <h1>Employer Work Values</h1>
+              <h1>Your Work Values</h1>
 
               <p class = 'lead'>
                 Think about the things that you are looking for in an employer and rate how important each of those things is to you.
@@ -168,7 +183,7 @@
 
 
 
-    <input type = "submit" class = 'btn btn-primary btn-lg' value = "Employer Info&raquo;">
+    <input type = "submit" class = 'btn btn-primary btn-lg' value = "Next&raquo;">
   </fieldset>
   {{/autoForm}}
   </div>
@@ -179,7 +194,7 @@
 <template name = 'tSurvey3View'>
 {{#if currentUser}}
   {{> tSurveyNav}}
-
+  {{> surveyInnerNav}}
   {{> tSurveyMain3}}
 
 {{else}}
@@ -195,7 +210,7 @@
 
           <div class="cover-container">
 
-              <h1>Employer Work Values</h1>
+              <h1>Your Work Values</h1>
 
               <p class = 'lead'>
                 Think about the things that you are looking for in an employer and rate how important each of those things is to you.
@@ -240,7 +255,7 @@
 
 
 
-    <input type = "submit" class = 'btn btn-primary btn-lg' value = "Employer Info&raquo;">
+    <input type = "submit" class = 'btn btn-primary btn-lg' value = "Next&raquo;">
     </fieldset>
     {{/autoForm}}
     </div>
@@ -252,7 +267,7 @@
 <template name = 'tSurvey4View'>
 {{#if currentUser}}
   {{> tSurveyNav}}
-
+  {{> surveyInnerNav}}
   {{> tSurveyMain4}}
 
 {{else}}
@@ -268,7 +283,7 @@
 
           <div class="cover-container">
 
-              <h1>Employer Work Values</h1>
+              <h1>Your Work Values</h1>
 
               <p class = 'lead'>
                 Think about the things that you are looking for in an employer and rate how important each of those things is to you.
@@ -299,7 +314,7 @@
       <br>
     {{> afQuickField name='poorperfs_self' }}
       <br>
-      <input type = "submit" class = 'btn btn-primary btn-lg' value = "Employer Info&raquo;">
+      <input type = "submit" class = 'btn btn-primary btn-lg' value = "Confirm&raquo;">
     </fieldset>
   {{/autoForm}}
 </div>

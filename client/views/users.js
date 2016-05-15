@@ -184,6 +184,7 @@ Template.login.events({
         'submit form': function(event) {
 
           event.preventDefault();
+          console.log('test');
 
 
         },
