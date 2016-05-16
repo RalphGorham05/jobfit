@@ -26,7 +26,7 @@ function isAdmin()
 
 
 
-
+//server side publications
 Meteor.publish('users', function()
 {
     var currentUserId = this.userId;

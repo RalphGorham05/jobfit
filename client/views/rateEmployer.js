@@ -56,7 +56,9 @@ Template.empFirst.events({
           }
 
 
-
+          //confimation alert 
+          //check whether user skipped any
+          //if did, choose alert with skipped questions
         if (skip.length > 0)
         {
           new Confirmation({
@@ -103,6 +105,7 @@ Template.empFirst.events({
       });
 
 //get slider values from 2nd group of suvrey questions
+//used same logic as first group
 Template.empSecond.events({
   'submit form': function(event){
 
@@ -198,6 +201,7 @@ Template.empSecond.events({
     });
 
 
+//get slider values from 3rd group
 Template.empThird.events({
   'submit form': function(event){
 
@@ -287,7 +291,8 @@ Template.empThird.events({
     }
     });
 
-
+//get values from fourth group
+// add survey object with the values to current survey
 Template.empFourth.events({
   'submit form': function(event){
 
@@ -417,7 +422,9 @@ Template.rateEmployer.events({
   }
 });
 
+//helpers
 Template.rateEmployer.helpers({
+  //check current survey
   'surveyCheck': function()
   {
     return Session.get('Survey');

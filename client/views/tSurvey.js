@@ -1,3 +1,4 @@
+//get slider values from 1st page
 Template.pSurvey1.events({
 	"submit form": function (event, template) {
       // Prevent default browser form submit
@@ -9,7 +10,7 @@ Template.pSurvey1.events({
       var workload = AutoForm.getFieldValue('workload_self','talentsurvey1');
       var cpath = AutoForm.getFieldValue('careerpath_self','talentsurvey1');
 
-
+      //create survey object 
       var survey = {
             'work life balance':{'value': worklife, 'lock': 0, 'skipped': 0},
             'job security':{'value':jobsec, 'lock':0, 'skipped': 0},
@@ -91,6 +92,7 @@ Template.pSurvey1.events({
 
         }
 
+        //create session with survey object 
         Session.set('Per_Survey',survey);
 
 
@@ -105,7 +107,7 @@ Template.pSurvey1.events({
 
 
 
-
+//get values from 2nd page
 Template.pSurvey2.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -120,11 +122,11 @@ Template.pSurvey2.events({
       var sup = AutoForm.getFieldValue('goodsup_self','talentsurvey2');
       
 
-
+      //grab current survey in order to update
       var survey = Session.get('Per_Survey');
 
 
-
+      //update survey object with values from 2nd page
       survey['promotion_criteria'].value = crit;
       survey['promotion_opportunities'].value = opp;
       survey['freedom'].value = free;
@@ -202,7 +204,8 @@ Template.pSurvey2.events({
     });
 
 
-
+//get values from 3rd page
+//same logic as previous
 Template.pSurvey3.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -301,7 +304,7 @@ Template.pSurvey3.events({
 
 
 
-
+//get values from 4th page
 Template.pSurvey4.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -395,11 +398,9 @@ Template.pSurvey4.events({
         survey_values.push(survey[key].value);
       }
 
-      console.log(survey);
-      console.log(survey_values);
 
-
-      
+      //method which checks if survey is allowed (needs to be over 6 months) 
+      //if allowed, create personal survey with the values from survey object    
 			Meteor.call('checkSurveyDate', 'personal', function(err, editable){
 				if (err)
 				{

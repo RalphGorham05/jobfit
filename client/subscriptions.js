@@ -1,3 +1,5 @@
+//client side subscription for server publications
+
 Meteor.subscribe('users');
 
 Meteor.subscribe('personal_surveys');

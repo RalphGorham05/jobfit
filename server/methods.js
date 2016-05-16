@@ -11,11 +11,13 @@ Meteor.startup(function () {
 
 Meteor.methods(
 {
+  //test function that returns object's type
   'type'(thing){
     if(thing===null)return "[object Null]"; // special case
      return Object.prototype.toString.call(thing);
   },
 
+  //adds user to a role
   'addUserRole'(userid, role)
   {
     Roles.addUsersToRoles(userid,role);
@@ -24,13 +26,14 @@ Meteor.methods(
   },
 
 
-
+  //create new company in Company collection
   'insert_company'(company)
   {
   	var inserted = Company.insert(company);
   	return inserted;
   },
 
+  //creates new employer survey
   'insert_survey'(company, remote, curr_form, user_type)
   {
     var inserted = EmployerSurvey.insert({
@@ -43,7 +46,7 @@ Meteor.methods(
 
   },
 
-
+  //updates employer survey
   'update_Emp_Survey'(id, survey)
   {
     EmployerSurvey.update(
@@ -71,6 +74,7 @@ Meteor.methods(
       });
   },
 
+  //creates new personal survey
   'add_Personal_Survey'(survey)
   {
     var inserted = PersonalSurvey.insert({
@@ -96,6 +100,7 @@ Meteor.methods(
     return inserted;
   },
 
+  //updates user survey info in profile depending on type of survey
   'update_userSurvey'(objectID, survey_type)
   {
 
@@ -124,6 +129,7 @@ Meteor.methods(
 
   },
 
+  //add job info to survey
   'add_job_info'(surveyID, info)
   {
       EmployerSurvey.update(
@@ -140,6 +146,7 @@ Meteor.methods(
 
   },
 
+  //add job status to survey
   'add_job_status'(surveyID, status)
   {
       EmployerSurvey.update(
@@ -155,6 +162,7 @@ Meteor.methods(
 
   },
 
+  //add job feeligns to survey
   'add_job_feelings'(surveyID, feelings)
   {
       EmployerSurvey.update(
@@ -175,6 +183,7 @@ Meteor.methods(
 
   },
 
+  //add occcupation info to survey
   'add_occupation'(surveyID, data)
   {
       EmployerSurvey.update(
@@ -190,6 +199,7 @@ Meteor.methods(
 
   },
 
+  //add reasons left to survey
   'add_reasons_left'(surveyID, choice, reasons)
   {
       EmployerSurvey.update(
@@ -204,13 +214,14 @@ Meteor.methods(
 
   },
 
-
+  //email test
   'sendEmail'(email)
   {
       // send the email!
       Email.send({to:email, from:'empMatch@gmail.com', subject:'Thank you for signing up for our project', text:'We will share with you some news about us in a near future. See you soon!'});
   },
 
+  //sends verification email 
   'sendVerificationLink'()
   {
     var userId = Meteor.userId();
@@ -219,6 +230,7 @@ Meteor.methods(
     }
   },
 
+  //check if 6 months has passed since last survey
   'checkSurveyDate'(type)
   {
 		var surv;
@@ -272,6 +284,7 @@ Meteor.methods(
 		return false;
   },
 
+  //returns array with user's employer surveys
   'get_employer_surveys'()
   {
     var surveys = [];
@@ -296,6 +309,7 @@ Meteor.methods(
 
   },
 
+  //returns array with user's personal surveys
   'get_personal_surveys'()
   {
     var surveys = [];
@@ -314,6 +328,7 @@ Meteor.methods(
     return surveys;
   },
 
+  //returns date when survey was completed
   'get_date_rated'()
   {
     var dates = [];
@@ -329,6 +344,7 @@ Meteor.methods(
      return dates;
 
   },
+  //get array of companies rated
  'get_companies_rated'()
   {
 
@@ -346,6 +362,7 @@ Meteor.methods(
      return companies;
   },
 
+  //check if rated company already
  'check_if_company_rated'(name_check)
   {
      var rated = Meteor.call('get_companies_rated');

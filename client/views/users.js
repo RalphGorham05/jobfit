@@ -15,12 +15,13 @@ Bert.defaults.style = 'growl-top-right';
 Template.talentRegistration.events({
         'submit form': function(event) {
 
+          //prevents default form submit behaviour
           event.preventDefault();
 
         }
       });
 
-
+//validation on rendering of page and creation of new account
 Template.talentRegistration.onRendered(function(){
               var validator = $('.registration').validate({
                   submitHandler: function(event)
@@ -30,7 +31,7 @@ Template.talentRegistration.onRendered(function(){
                     var usertype = $('input[name=userType]:checked').val();
 
 
-
+                    //create new account 
                     Accounts.createUser({
                         email: email,
                         password: password
@@ -180,15 +181,15 @@ jQuery.validator.addMethod('valid', function(value, element)
 
 
 
+//login events
 Template.login.events({
         'submit form': function(event) {
 
           event.preventDefault();
-          console.log('test');
-
 
         },
 
+        //go to forgot password view when click button
         'click #forgot_pass_button': function(event)
         {
           event.preventDefault();
@@ -198,6 +199,7 @@ Template.login.events({
 
       });
 
+//login validation 
 Template.login.onRendered(function(){
     var validator = $('#login').validate(
       {
@@ -209,7 +211,7 @@ Template.login.onRendered(function(){
             var loginEmail = $('[name=loginEmail]').val();
             var loginPassword = $('[name=loginPassword]').val();
 
-
+            //use builtin login method 
             Meteor.loginWithPassword(loginEmail, loginPassword, function(err){
               if(err)
               {
@@ -244,7 +246,7 @@ Template.login.onRendered(function(){
     });
 
 
-
+//tooltip test
 Template.home.onRendered(function()
 {
    $('[data-toggle="tooltip"]').tooltip() //initialize all tooltips in this template
@@ -268,7 +270,7 @@ Template.mainDashboard.helpers({
 });
 
 
-
+//email test
 Template.email.events({
     'click #btn': function () {
       // if someone click on the button ( tag), then we ask the server to execute the function sendEmail (RPC call)
