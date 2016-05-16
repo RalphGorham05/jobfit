@@ -25,14 +25,16 @@ Template.employerInfo.events({
   {
     event.preventDefault();
 
+    //values of the various input fields
     var company = $('[name=companyName]').val();
     var address = $('[name=address]').val();
     var city = $('[name=city]').val();
     var state = $('[name=state]').val();
     var zip = $('[name=zip]').val();
-  
     var remote = event.target.remote.value;
     var current = event.target.curr_or_form.value;
+
+    //declares variable to store the type of user
     var userType;
 
 
@@ -46,6 +48,7 @@ Template.employerInfo.events({
     */
 
 
+    //creates an object to store company information
     comp =
     {
       'companyName': company,
@@ -55,6 +58,8 @@ Template.employerInfo.events({
       'zip': zip
     }
 
+    //checks user's role and assigns that to userType
+    //if no Role, then assigns Anon for the anonymous users
     if (Roles.userIsInRole(Meteor.userId(), 'Rep'))
     {
       userType = 'Rep';
@@ -69,15 +74,19 @@ Template.employerInfo.events({
       userType = 'Anon';
     }
 
-    
+
     //could fix this section with collection hooks
     //or functions
 
 
-    
-   
-   
 
+
+
+      //inserts the company object into Company collection and sets the company id as
+      // a session variable
+
+      //inserts a new survey into Employer Survey collection and sets the new survey id as
+      // a session variable.
       Meteor.call('insert_company', comp, function(error, insertedCompany)
       {
           if (error)
@@ -138,10 +147,10 @@ Template.employerInfo.events({
           }
 
       });
-    
 
 
 
+    //check user's role to determine path ie. if not user(anonymous) go to rating screen
     var talent_check = Roles.userIsInRole(Meteor.userId(), 'Talent');
     if (talent_check)
     {
@@ -160,7 +169,7 @@ Template.employerInfo.events({
 });
 
 
-
+//helper that returns whether its current or former employer
 Template.Emp.helpers({
   isFormer: function(curr_or_form) {
     var formerCheck = Session.get('current_or_former')
@@ -176,6 +185,7 @@ Template.Emp.helpers({
 });
 
 
+//form validation
 Template.employerInfo.onRendered(function(){
         $('#currentCompanyForm').validate(
 
@@ -266,6 +276,7 @@ Template.employerInfo.onRendered(function(){
 
       });
 
+//custom method to validate zip code
 jQuery.validator.addMethod("zipcodeUS", function(value, element) {
   return this.optional(element) || /\d{5}-\d{4}$|^\d{5}$/.test(value);
 }, "The specified US ZIP Code is invalid");
@@ -285,21 +296,21 @@ Template.jobInfo.events({
       var p3= AutoForm.getFieldValue('promo_date.2','jobInfoForm');
       var p4= AutoForm.getFieldValue('promo_date.3','jobInfoForm');
       var p5= AutoForm.getFieldValue('promo_date.4','jobInfoForm');
+
       var title = event.target.title.value;
       var sDate= event.target.start_date.value;
       var promo = event.target.promoted.value;
-      console.log(title);
-      console.log(promo);
-      console.log(sDate);
+
       var promoDates = [p1,p2,p3,p4,p5];
 
-
+      //get current survey session
       var sur = Session.get('Survey');
       var info = [title, sDate, promo, promoDates]
-      console.log(sur);
 
+      //add job information to current survey
       Meteor.call('add_job_info', sur, info);
 
+      //get values from status form
       var status = event.target.status.value;
       var hrs= event.target.hours.value;
 
@@ -310,12 +321,11 @@ Template.jobInfo.events({
 
       var sur = Session.get('Survey');
       var status_info = [status, hrs, other];
-      console.log(status_info);
 
-      //Add job info to survey
+
+      //Add job status to survey
       Meteor.call('add_job_status', sur, status_info);
-      // Clear form
-      //console.log(status_info);
+      //got to job feelings
       Router.go('jobFeelingView');
 
 
@@ -324,35 +334,9 @@ Template.jobInfo.events({
 
 });
 
-Template.empStatus.events({
-  "submit form": function (event, template) {
-      // Prevent default browser form submit
-      event.preventDefault();
 
-      // Get value from form element
-      var status = event.target.status.value;
-      var hrs= event.target.hours.value;
-
-      if (AutoForm.getFieldValue('other','statusForm'))
-      {
-        var other = event.target.other.value;
-      }
-
-      var sur = Session.get('Survey');
-      var status_info = [status, hrs, other];
-      console.log(status_info);
-
-      //Add job info to survey
-      Meteor.call('add_job_status', sur, status_info);
-
-      // Clear form
-
-
-    }
-
-
-});
-
+//get values from job feeling survey and create object
+// use method to add the object to current survey
 Template.jobFeeling.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit

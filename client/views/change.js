@@ -12,6 +12,8 @@ Template.changePassword.events({
             //return false;
         //}
 
+
+        //changes password using builtin Accounts function
         Accounts.changePassword(currentPassword, newPassword, function(error) {
             if (error) {
                 message = 'There was an issue: ' + error.reason;
@@ -26,7 +28,7 @@ Template.changePassword.events({
     }
 });
 
-
+//logout function for Dashboard
 Template.changeDashboard.events({
     'click .logout': function(event){
         event.preventDefault();
@@ -34,6 +36,7 @@ Template.changeDashboard.events({
     }
 });
 
+//helper that returns email address of user
 Template.changeDashboard.helpers({
   email: function() {
     return Meteor.user().emails[0].address;

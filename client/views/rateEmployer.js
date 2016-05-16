@@ -1,5 +1,5 @@
 
-
+//get slider values from first group of questions
 Template.empFirst.events({
         'submit form': function(event) {
 
@@ -12,6 +12,9 @@ Template.empFirst.events({
           var dev = AutoForm.getFieldValue('development_opportunities','ESurveyForm1');
           var work = AutoForm.getFieldValue('workload','ESurveyForm1');
           var path = AutoForm.getFieldValue('career_path','ESurveyForm1');
+
+          //creates survey object with all the field values initialized
+          //lock if value changes
 
           var survey = {
             'work life balance':{'value': wlb, 'lock': 0, 'skipped': 0},
@@ -32,7 +35,6 @@ Template.empFirst.events({
             'rewrecog':{'value':-1, 'lock':0, 'skipped': 0},
             'rew_perf':{'value':-1, 'lock':0, 'skipped': 0}
           };
-
 
           for (i in survey)
           {
@@ -100,7 +102,7 @@ Template.empFirst.events({
         }
       });
 
-
+//get slider values from 2nd group of suvrey questions
 Template.empSecond.events({
   'submit form': function(event){
 

@@ -24,26 +24,10 @@ Template.information.events({
     });
   }
 
-  /*
-  //closes the sidebar menu
-  'click .menu-close'(event)
-  {
-    event.preventDefault();
-    $("#sidebar-wrapper").toggleClass("active");
-  },
-
-  // Opens the sidebar menu
-  "click #menu-toggle"(e)
-  {
-    e.preventDefault();
-    $("#sidebar-wrapper").toggleClass("active");
-  }
-  */
-
 
 });
 
-
+//form validation for pii
 Template.pi.onRendered(function(){
     $('#personalInFoForm').validate(
 
@@ -75,7 +59,7 @@ Template.pi.onRendered(function(){
     });
 
 
-
+// get values from pi template and add them to currrent user's profile
 Template.pi.events({
   "submit form": function (event) {
       // Prevent default browser form submit
@@ -134,6 +118,7 @@ Template.user.helpers({
   }
 });
 
+// get values of fields in the education template and sets them in user's profile
 Template.education.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -166,7 +151,7 @@ Template.education.events({
 });
 
 
-
+// get the 5 skill values and add them to user profile
 Template.skills.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -195,7 +180,7 @@ Template.skills.events({
 
 });
 
-
+// get the 5 creds/certs values and add them to user profile
 Template.creds.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
@@ -226,7 +211,7 @@ Template.creds.events({
 
 });
 
-
+// get the occupation values and adds them to current survey
 Template.occupationInfo.events({
   "submit form": function (event, template) {
       // Prevent default browser form submit
